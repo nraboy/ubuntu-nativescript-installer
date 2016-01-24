@@ -4,7 +4,29 @@
 
 # Ubuntu NativeScript Installer
 
-Installs Android, Apache Ant, Gradle, Java JDK, Node.js, and Telerik NativeScript on Ubuntu x64 and x86 architectures.  Not yet been tested, but should work with Ubuntu 14.04 Trusty Tahr and above.
+Installs Android, Java JDK, Node.js, and Telerik NativeScript on Ubuntu x64 architectures.  Tested with Ubuntu 14.04 Trusty Tahr, but should work with anything greater.
+
+## Usage
+
+After cloning the repository or downloading the project, using your Terminal, navigate into the project directory.  You'll need to give the script execute permission in case GitHub stripped it out.  This can be done by running the following in the Terminal:
+
+```
+chmod +x ubuntu_nativescript_installer.sh
+```
+
+With the script having execute permission, execute the script by running:
+
+```
+sudo ./ubuntu_nativescript_installer.sh
+```
+
+A few things to note here:
+
+1. It is very important you **are not** logged into the root user account of your operating system
+2. You need to use sudo from your regular account
+3. NativeScript will ask you two questions at the end of the script making this script not completely automated
+
+When finished, you will be able to build NativeScript applications without additional steps required.
 
 ## Contribution Rules
 
@@ -18,10 +40,6 @@ Tweet me on Twitter - [@nraboy](https://www.twitter.com/nraboy)
 
 Telerik NativeScript - [http://www.nativescript.org](http://www.nativescript.org)
 
-NodeJS - [http://www.nodejs.org](http://www.nodejs.org)
-
-Apache Cordova - [http://cordova.apache.org](http://cordova.apache.org)
+Node.js - [http://www.nodejs.org](http://www.nodejs.org)
 
 Android - [http://developer.android.com](http://developer.android.com)
-
-Gradle - [https://www.gradle.org](https://www.gradle.org)
