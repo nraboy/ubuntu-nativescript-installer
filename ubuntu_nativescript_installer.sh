@@ -49,6 +49,7 @@ if [ -z "$ANDROID_HOME" ]; then
     cd ~/ && echo "export PATH=\$PATH:$ANDROID_SDK_PATH/platform-tools" >> ".profile"
     export PATH=$PATH:$ANDROID_SDK_PATH/tools
     export PATH=$PATH:$ANDROID_SDK_PATH/platform-tools
+    echo y | android update sdk --no-ui --filter tools,platform-tools,build-tools-23.0.2,android-23,addon-google_apis-google-23,extra-android-m2repository,extra-android-support
 else
     echo "The Android SDK was already installed"
 fi
@@ -66,7 +67,7 @@ if [ "$JAVA_HOME" != "" ]; then
 fi
 
 # Install Telerik NativeScript
-npm install -g nativescript
+npm install -g nativescript --unsafe-perm
 
 cd "$INSTALL_PATH" && chmod 777 "node" -R
 
