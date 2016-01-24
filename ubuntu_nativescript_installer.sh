@@ -7,7 +7,6 @@
 # Downloads and configures the following:
 #
 #   Java JDK
-#   Apache Ant
 #   Android
 #   NPM
 #   NativeScript
@@ -26,12 +25,29 @@ dpkg --add-architecture i386
 # Update all Ubuntu software repository lists
 apt-get update
 
+# Android SDK requires some x86 architecture libraries even on x64 system
+apt-get install -qq -y libc6:i386 libgcc1:i386 libstdc++6:i386 libz1:i386
+
+# Install JDK, G++ and Apache Ant
+apt-get -qq -y install default-jdk g++
+
+# Set JAVA_HOME based on the default OpenJDK installed
+if [ -z "$JAVA_HOME" ]; then
+    export JAVA_HOME="$(find /usr -type l -name 'default-java')"
+    if [ "$JAVA_HOME" != "" ]; then
+        echo "export JAVA_HOME=$JAVA_HOME" >> ".profile"
+    fi
+else
+    echo "The Java Development Kit was already installed"
+fi
+
 cd /tmp
 
-if [ -z "$(node -v)" ]; then
+if [ -z "$NODE_HOME" ]; then
     wget -c "$NODE_X64" -O "nodejs.tgz" --no-check-certificate
     tar zxf "nodejs.tgz" -C "$INSTALL_PATH"
     cd "$INSTALL_PATH" && mv "node-v0.12.9-linux-x64" "node"
+    cd ~/ && echo "export NODE_HOME=$NODE_PATH" >> ".profile"
     cd ~/ && echo "export PATH=\$PATH:$NODE_PATH/bin" >> ".profile"
     export PATH=$PATH:$NODE_PATH/bin
 else
@@ -52,22 +68,6 @@ if [ -z "$ANDROID_HOME" ]; then
     echo y | android update sdk --no-ui --filter tools,platform-tools,build-tools-23.0.2,android-23,addon-google_apis-google-23,extra-android-m2repository,extra-android-support
 else
     echo "The Android SDK was already installed"
-fi
-
-# Android SDK requires some x86 architecture libraries even on x64 system
-apt-get install -qq -y libc6:i386 libgcc1:i386 libstdc++6:i386 libz1:i386
-
-# Install JDK, G++ and Apache Ant
-apt-get -qq -y install default-jdk ant g++
-
-# Set JAVA_HOME based on the default OpenJDK installed
-if [ -z "$JAVA_HOME" ]; then
-    export JAVA_HOME="$(find /usr -type l -name 'default-java')"
-    if [ "$JAVA_HOME" != "" ]; then
-        echo "export JAVA_HOME=$JAVA_HOME" >> ".profile"
-    fi
-else
-    echo "The Java Development Kit was already installed"
 fi
 
 # Install Telerik NativeScript
