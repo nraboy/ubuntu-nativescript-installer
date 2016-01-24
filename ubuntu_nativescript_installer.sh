@@ -58,7 +58,7 @@ if [ -z "$ANDROID_HOME" ]; then
     wget -c "$ANDROID_SDK_X64" -O "android-sdk.tgz" --no-check-certificate
     tar zxf "android-sdk.tgz" -C "$INSTALL_PATH"
     cd "$INSTALL_PATH" && mv "android-sdk-linux" "android-sdk"
-    cd "$INSTALL_PATH" && chown root:root "android-sdk" -R
+    cd "$INSTALL_PATH" && chown $USER:$USER "android-sdk" -R
     cd "$INSTALL_PATH" && chmod 777 "android-sdk" -R
     cd ~/ && echo "export ANDROID_HOME=$ANDROID_SDK_PATH" >> ".profile"
     cd ~/ && echo "export PATH=\$PATH:$ANDROID_SDK_PATH/tools" >> ".profile"
@@ -74,6 +74,7 @@ fi
 npm install -g nativescript --unsafe-perm
 
 cd "$INSTALL_PATH" && chmod 777 "node" -R
+cd ~/.local/share && chown $USER:$USER ".nativescript-cli" -R
 
 echo "----------------------------------"
 echo "Restart your Ubuntu session for installation to complete..."
