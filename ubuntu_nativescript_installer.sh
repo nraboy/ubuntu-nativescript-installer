@@ -61,9 +61,13 @@ apt-get install -qq -y libc6:i386 libgcc1:i386 libstdc++6:i386 libz1:i386
 apt-get -qq -y install default-jdk ant g++
 
 # Set JAVA_HOME based on the default OpenJDK installed
-export JAVA_HOME="$(find /usr -type l -name 'default-java')"
-if [ "$JAVA_HOME" != "" ]; then
-    echo "export JAVA_HOME=$JAVA_HOME" >> ".profile"
+if [ -z "$JAVA_HOME" ]; then
+    export JAVA_HOME="$(find /usr -type l -name 'default-java')"
+    if [ "$JAVA_HOME" != "" ]; then
+        echo "export JAVA_HOME=$JAVA_HOME" >> ".profile"
+    fi
+else
+    echo "The Java Development Kit was already installed"
 fi
 
 # Install Telerik NativeScript
