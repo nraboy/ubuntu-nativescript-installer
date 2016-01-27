@@ -16,9 +16,9 @@ ANDROID_SDK_PATH=/opt/android-sdk
 NODE_PATH=/opt/node
 PARENT_USER=$(who am i | awk '{print $1}')
 
-# Latest Android, Node.js as of
+# Latest Android, Node.js as of 01-27-2016
 ANDROID_SDK_X64="http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz"
-NODE_X64="https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.gz"
+NODE_X64="https://nodejs.org/download/release/v4.2.6/node-v4.2.6-linux-x64.tar.gz"
 
 # Add i386 architecture
 dpkg --add-architecture i386
@@ -47,7 +47,7 @@ cd /tmp
 if [ -z "$NODE_HOME" ]; then
     wget -c "$NODE_X64" -O "nodejs.tgz" --no-check-certificate
     tar zxf "nodejs.tgz" -C "$INSTALL_PATH"
-    cd "$INSTALL_PATH" && mv "node-v0.12.9-linux-x64" "node"
+    cd "$INSTALL_PATH" && mv "node-v4.2.6-linux-x64" "node"
     cd ~/ && echo "export NODE_HOME=$NODE_PATH" >> ".profile"
     cd ~/ && echo "export PATH=\$PATH:$NODE_PATH/bin" >> ".profile"
     export PATH=$PATH:$NODE_PATH/bin
